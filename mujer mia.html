@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ramo de Lirios CSS</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .mensaje {
+      font-size: 2rem;
+      color: #6a1b9a;
+      margin-bottom: 30px;
+      text-align: center;
+      opacity: 0;
+      animation: aparecerTexto 2s ease forwards 1s;
+    }
+
+    .ramo {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .lirio {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #e0b0ff;
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: aparecerFlor 0.8s ease forwards;
+    }
+
+    .lirio::before, .lirio::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #e0b0ff;
+      border-radius: 50% 50% 0 50%;
+    }
+
+    .lirio::before {
+      transform: rotate(90deg);
+      left: -20px;
+      top: 0;
+    }
+
+    .lirio::after {
+      transform: rotate(180deg);
+      left: 0;
+      top: -20px;
+    }
+
+    @keyframes aparecerFlor {
+      from {
+        transform: scale(0.2) rotate(45deg);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes aparecerTexto {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mensaje">"Como lirios en el viento, mis pensamientos siempre florecen por ti."</div>
+  <div class="ramo" id="ramo"></div>
+
+  <script>
+    const ramo = document.getElementById("ramo");
+    const cantidad = 12;
+    for (let i = 0; i < cantidad; i++) {
+      const flor = document.createElement("div");
+      flor.className = "lirio";
+      const angulo = (2 * Math.PI * i) / cantidad;
+      const radio = 70;
+      flor.style.left = `${100 + radio * Math.cos(angulo) - 20}px`;
+      flor.style.top = `${100 + radio * Math.sin(angulo) - 20}px`;
+      flor.style.animationDelay = `${i * 0.3}s`;
+      ramo.appendChild(flor);
+    }
+  </script>
+</body>
+</html>
